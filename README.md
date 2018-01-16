@@ -41,7 +41,7 @@ Pull-up resistor detail on the bottom side:
 
 The settings are inside tempMonitor.py :
 
-```
+```python
 # setup onewire and polling interval
 oneWireGpio = 11 # set the sensor GPIO
 pollingInterval = 60 # seconds
@@ -50,13 +50,13 @@ infoInterval = 8  # hours
 - `pollingInterval`: sensor update, each 60 seconds the temperature will be compared with the setpoint.
 - `infoInterval`: number of hours between INFO emails.
 
-```
+```python
 # setup Temp
 setPoint = 22  # Celsius
 ```
 - `setPoint`: if the temperature rises above this value an ALERT email will be triggered.
 
-```
+```python
 # e-mail settings - change these values with your provider 
 sender = 'sender@email'
 toaddrs = 'recpient@email'
@@ -68,19 +68,19 @@ password = 'xxxxxxxx'
 - `password`: sender account password
 
 Change your email smtp server based on your service:
-```
+```python
 server = smtplib.SMTP_SSL('smtp.gmail.com:465') # smtp server
 ```
 
 # Deployment
 ## Install python
-```
+```console
 opkg update
 ```
 
 Now you can install python-light:
 
-```
+```console
 opkg install python-light
 ```
 ### Using `pip` to Install Python Modules
@@ -91,12 +91,12 @@ The official Python package manager, `pip`, is the standard way of installing Py
 
 We'll need to first install `pip` on the Omega:
 
-```
+```console
 opkg update
 opkg install python-pip
 ```
 ####  Copy the project files inside a folder
-```
+```console
 root@Omega-xxxx:~# ls
 oneWire.py            tempMonitor.py        temperatureSensor.py
 root@Omega-xxxx:~#
@@ -106,7 +106,7 @@ root@Omega-xxxx:~#
 The /etc/rc.local file is a script that will be executed automatically by the system once the boot sequence is complete.
 
 When your Omega boots, it will read commands from the /etc/rc.local file, and execute them.
-```
+```bash
 # Put your custom commands here that should be executed once
 # the system init finished. By default this file does nothing.
 python  /root/tempMonitor.py &  
@@ -117,7 +117,7 @@ then your Omega will not successfully finish it’s boot sequence. To avoid this
 by adding an ampersand to the end of the command.
 
 ### Sample Alert Email from the SRTM
-```
+```console
 Date: Sat, 13 Jan 2018 23:24:41 -0800 (PST)
 From: sender@email.com
 To: recipient@email.com
